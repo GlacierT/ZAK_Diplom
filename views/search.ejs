@@ -1,0 +1,54 @@
+<% include ./layout/header.ejs %>
+
+  <div class="main">
+    <div class="container">
+
+        <div class="content add-post">
+
+          <div class="sidebar">
+                <div class="box auth">
+                    <ul>
+                        <li>
+                          <a href="/post/add">Додати пост</a>
+                        </li>
+                        <li>
+                          <a href="/file">Додати докумен</a>
+                        </li>
+                        <li>
+                            <a href="/search">Завантажені документи</a>
+                        </li>
+                        <li>
+                          <a href="/api/auth/logout">Вийти</a>
+                        </li>
+                      </ul>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="col">
+                    <h1 class="text-center display-4 my-4">Завантажені файли</h1>
+                    <form>
+                      <input type="text" placeholder="Назва файлу">
+                      <button class="btn btn-danger btn-block mt-4" >Знайти</button>
+                    </form>
+                    
+                    <hr>
+                    <% if(files){ %>
+                      <% files.forEach(function(file) { %>
+                        <div class="card card-body mb-3" >
+                            <a href="read/<%=file.filename %>"><%= file.filename %></a>
+                        </div>
+                        <% }) %>
+                          <% } else { %>
+                            <p>No files to show</p>
+                            <% } %>
+
+            </div>
+        </div>
+
+            </div>
+
+    </div>
+  </div>
+
+  <% include ./layout/footer.ejs %>

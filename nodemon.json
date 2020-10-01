@@ -1,0 +1,9 @@
+{
+  "ignore": ["node_modules", "dev", "public"],
+  "env": {
+    "NODE_ENV": "development",
+    "PORT": 3000
+  },
+  "ext": ".js,.json",
+  "watch": "./"
+}

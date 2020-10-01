@@ -1,0 +1,73 @@
+<% include ./layout/header.ejs %>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+
+  <div class="main">
+    <div class="container">
+
+        <div class="content add-post">
+
+          <div class="sidebar">
+                <div class="box auth">
+                    <ul>
+                        <li>
+                          <a href="/post/add">Додати пост</a>
+                        </li>
+                        <li>
+                          <a href="/file">Додати докумен</a>
+                        </li>
+                        <li>
+                          <a href="/search">Завантажені документи</a>
+                        </li>
+                        <li>
+                          <a href="/api/auth/logout">Вийти</a>
+                        </li>
+                      </ul>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="col">
+              
+                    <h1 class="text-center display-4 my-4">Завантажити файлу</h1>
+                    <form action="/upload" method="POST" enctype="multipart/form-data">
+                      <div class="custom-file mb-3">
+                        <input type="file" name="file" id="file" class="custom-file-input">
+                        <label for="file" class="custom-file-label">Оберіть файл</label>
+                      </div>
+                      <input type="submit" value="Завантажити на сайт" class="btn btn-primary btn-block">
+                    </form>
+                    <hr>
+                    <% if(files){ %>
+                      <% files.forEach(function(file) { %>
+                        <div class="card card-body mb-3">
+                          <% if(file.isImage) { %>
+                            <div class="text-center">
+                              <img src="image/<%= file.filename %>" alt="" height="400">
+                            </div>
+                            <% } else { %>
+                              <embed src="read/<%=file.filename %>" height="400"/>
+                                <% } %>
+                                <a download href="read/<%=file.filename %>" type="application/file">
+                                  <button class="btn btn-danger btn-block mt-4">Зберегти</button>
+                                </a>
+                                <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                                  <button class="btn btn-danger btn-block mt-4">Видалити</button>
+                                </form>
+                              </div>  
+                        </div>
+                        <% }) %>
+                          <% } else { %>
+                            <p>No files to show</p>
+                            <% } %>
+
+            </div>
+        </div>
+
+            </div>
+
+    </div>
+  </div>
+
+  <% include ./layout/footer.ejs %>

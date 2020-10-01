@@ -1,0 +1,53 @@
+<% include ../layout/header.ejs %>
+
+  <div class="main">
+    <div class="container">
+      
+      <div class="content add-post"><% include ../layout/sidebar.ejs %>
+
+        <form method="post" class="post-form">
+          <% if (post.title) { %>
+            <h2>Редагувати запис</h2>
+            <% } else { %>
+              <h2>Створити записи</h2>
+              <% }  %>
+
+                <div class="form-group">
+                  <label for="post-title">Заголовок</label>
+                  <input type="text" id="post-title" name="title" value="<%=post.title %>" />
+                </div>
+                <div class="form-group">
+                  <label for="post-body">Текст</label>
+                  <textarea id="post-body"><%= post.body %></textarea>
+                </div>
+                <input type="hidden" id="post-id" name="postId" value="<%= post.id %>">
+
+                <div id="fileinfo">
+                  <% post.uploads.forEach(function(upload) {  %>
+                    <div class="img-container" id="<%= upload.id %>">
+                      <img src="/uploads<%= upload.path %>" alt="" />
+                    </div>
+                    <% }) %>
+
+                      <label for="file" class="custom-file-upload">
+                        <input type="file" name="file" id="file" required /> +
+                      </label>
+                </div>
+
+                <div class="buttons">
+                  <button class="save-button secondary-inverse">Зберігти як чорнетку</button>
+                  <button class="publish-button">Відправити</button>
+                </div>
+        </form>
+
+
+
+
+      </div>
+
+      
+
+    </div>
+  </div>
+
+  <% include ../layout/footer.ejs %>
